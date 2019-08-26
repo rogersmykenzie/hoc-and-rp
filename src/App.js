@@ -1,24 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
+import MyName from './components/MyName';
+import Counter from './render-prop-components/Counter';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <MyName name="Chester">
+        <h1>Hello</h1>
+      </MyName> */}
+      <Counter render={({counter, increase, decrease}) => {
+        return (
+          <>
+            <h1>{counter}</h1>
+            <button onClick={() => increase(1)}>Increment</button>
+          </>
+        )
+      }} />
+      <Counter render={(api) => {
+        return <h3 onClick={() => api.increase(1)}>{api.counter}</h3>
+      }}/>
     </div>
   );
 }
